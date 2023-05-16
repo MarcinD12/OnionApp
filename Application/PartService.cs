@@ -1,9 +1,11 @@
-﻿using OnionCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+using OnionCore.Models;
+using OnionCore.Interfaces;
 
 namespace Application
 {
@@ -15,17 +17,24 @@ namespace Application
             _EFPartRepository = partRepository;
         }
 
-
-
-
-        public List<Part> GetAllParts()
+        public string GetAllParts()
         {
-            return _EFPartRepository.GetAllParts();            
+            var allParts= _EFPartRepository.GetAllParts();
+            return JsonSerializer.Serialize(allParts);
         }
 
         public void UpdatePart(int partid,Part part)
         {
             _EFPartRepository.UpdatePart(partid, part);
+        }
+        public void AddPart(Part part)
+        {
+            _EFPartRepository.AddPart(part);
+        }
+
+        public void RemovePart(int partid)
+        {
+            _EFPartRepository.DeletePart(partid);
         }
     }
 }

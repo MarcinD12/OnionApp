@@ -1,4 +1,5 @@
-﻿using OnionCore;
+﻿using OnionCore.Interfaces;
+using OnionCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace Application
 
         public void AddOrder(Order order)
         {
+           
             Console.WriteLine(order.OrderType);
             _EFOrderRepository.addOrderToDatabase(order);
         }

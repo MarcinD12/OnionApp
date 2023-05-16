@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnionCore
+namespace OnionCore.Models
 {
     public class Order
     {
@@ -12,6 +12,10 @@ namespace OnionCore
         public int OrderId { get; set; }
         public int Quantity { get; set; }
         public int Cost { get; set; }
+
+        public Invoice? Invoice { get; set; }
+
+
     }
     public enum OrderTypes
     {

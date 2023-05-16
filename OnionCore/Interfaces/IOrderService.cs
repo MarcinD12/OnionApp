@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OnionCore.Models;
 
-namespace OnionCore
+namespace OnionCore.Interfaces
 {
-    public interface IEFOrderRepository
+    public interface IOrderService
     {
-        public void addOrderToDatabase(Order order);
+        public void AddOrder(Order order);
         public List<Order> GetAllOrders();
         public Order GetOrderById(int id);
     }

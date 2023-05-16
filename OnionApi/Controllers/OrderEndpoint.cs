@@ -1,6 +1,7 @@
 ﻿using Application;
 using Microsoft.AspNetCore.Mvc;
-using OnionCore;
+using OnionCore.Interfaces;
+using OnionCore.Models;
 using OnionInfrastructure;
 using System.Text.Json;
 
@@ -10,11 +11,10 @@ namespace OnionApi.Controllers
     {
 
         private readonly IOrderService _orderService;
-        private readonly IEFOrderRepository _EFOrderRepository;
-        public OrderEndpoint(IOrderService orderService,IEFOrderRepository EFOrderRepository)
+        public OrderEndpoint(IOrderService orderService)
         {
             _orderService = orderService;
-            _EFOrderRepository= EFOrderRepository;
+ 
         }
 
         [HttpGet("api/orders/all")]

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnionCore
+namespace OnionCore.Interfaces
 {
-    public interface IProductService
+    public interface IEFInvoiceRepository
     {
-        public void AddProduct();
     }
 }

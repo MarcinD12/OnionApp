@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using OnionInfrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using OnionCore;
 using Application;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using OnionCore.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +21,11 @@ builder.Services.AddSwaggerGen();
 
 
 var conString = builder.Configuration.GetConnectionString("SqliteConnection");
+builder.Services.AddDbContext<EFInvoiceRepository>(options =>
+{
+    options.UseSqlite(conString, b => b.MigrationsAssembly("OnionApi"));
+});
+
 builder.Services.AddDbContext<EFOrderRepository>(options=> {
     options.UseSqlite(conString,b=>b.MigrationsAssembly("OnionApi"));
     
@@ -36,6 +41,10 @@ builder.Services.AddDbContext<EFProductRepository>(options => {
 
 }
    );
+
+builder.Services.AddTransient<IEFInvoiceRepository, EFInvoiceRepository>();
+builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+
 builder.Services.AddTransient<IEFProductRepository, EFProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 

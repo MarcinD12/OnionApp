@@ -1,4 +1,5 @@
-﻿using OnionCore;
+﻿using OnionCore.Interfaces;
+using OnionCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,17 @@ namespace Application
 {
     public class ProductService : IProductService
     {
-        public void AddProduct()
+        private readonly IEFProductRepository eFProductRepository;
+        public ProductService(IEFProductRepository productRepository)
         {
-            throw new NotImplementedException();
+            eFProductRepository = productRepository;
         }
+        public void AddProduct(Product product)
+        {
+            
+        }
+        
 
-        public List<Part> GetAllParts()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdatePart(int partid, Part part)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using OnionCore;
+using OnionCore.Interfaces;
+using OnionCore.Models;
 
 namespace OnionInfrastructure
 {
@@ -22,7 +23,7 @@ namespace OnionInfrastructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-           
+           builder.Entity<Order>().HasOne(x=>x.Invoice).WithOne(x=>x.Order).HasForeignKey<Invoice>(x=>x.OrderId);
         }
 
         public void addOrderToDatabase(Order order)

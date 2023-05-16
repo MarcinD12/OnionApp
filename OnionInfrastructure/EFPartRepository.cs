@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnionCore;
+using OnionCore.Interfaces;
+using OnionCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,17 @@ namespace OnionInfrastructure
             partToUpdate = part;
             this.Update(partToUpdate);
             this.SaveChanges();
+        }
+
+        public void AddPart(Part part)
+        {
+            this.Parts.Add(part);
+            this.SaveChanges();
+        }
+
+        public void DeletePart(int partId)
+        {
+            this.Remove(partId);
         }
     }
 }

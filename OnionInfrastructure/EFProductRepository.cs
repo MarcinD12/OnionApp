@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnionCore;
+using OnionCore.Interfaces;
+using OnionCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,11 @@ namespace OnionInfrastructure
         {
             base.OnModelCreating(builder);
             
+        }
 
-
+        public void AddProduct(Product product)
+        {
+            this.Products.Add(product);
         }
     }
 }

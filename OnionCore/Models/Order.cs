@@ -12,6 +12,8 @@ namespace OnionCore.Models
         public int OrderId { get; set; }
         public int Quantity { get; set; }
         public int Cost { get; set; }
+        
+        public List<Part> Parts { get; set; }
 
         public Invoice? Invoice { get; set; }
 

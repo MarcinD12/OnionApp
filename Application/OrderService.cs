@@ -19,8 +19,7 @@ namespace Application
 
         public void AddOrder(Order order)
         {
-           
-            Console.WriteLine(order.OrderType);
+            Console.WriteLine(order.Cost);
             _EFOrderRepository.addOrderToDatabase(order);
         }
 

@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnionInfrastructure;
 
 #nullable disable
 
-namespace OnionApi.Migrations
+namespace OnionApi.Migrations.EFInvoiceRepositoryMigrations
 {
-    [DbContext(typeof(EFOrderRepository))]
-    partial class EFOrderModelSnapshot : ModelSnapshot
+    [DbContext(typeof(EFInvoiceRepository))]
+    [Migration("20230518151524_inv3")]
+    partial class inv3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -41,7 +44,7 @@ namespace OnionApi.Migrations
                     b.HasIndex("OrderId")
                         .IsUnique();
 
-                    b.ToTable("Invoice", (string)null);
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("OnionCore.Models.Order", b =>
@@ -61,7 +64,7 @@ namespace OnionApi.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("OnionCore.Models.Invoice", b =>

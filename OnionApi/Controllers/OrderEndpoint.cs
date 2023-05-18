@@ -35,6 +35,7 @@ namespace OnionApi.Controllers
         public void AddOrder(Order order)
         {
             Console.WriteLine(ModelState.IsValid);
+            Console.WriteLine(order.Cost);
             _orderService.AddOrder(order);
         }
 

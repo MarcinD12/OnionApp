@@ -11,9 +11,9 @@ namespace OnionCore.Models
         public int InvoiceId { get; set; }
         
         public DateTime InvoiceDate { get; set; }
-        public string InvoiceSubjectId { get; set; }
-
+        public string SubjectId { get; set; }
+        public int AmountToPay { get; set; }
         public int OrderId { get; set; }
-        public Order Order { get; set; }
+        
     }
 }

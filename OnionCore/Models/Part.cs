@@ -13,6 +13,7 @@ namespace OnionCore.Models
         public int Price { get; set; }
         public int PartStock { get; set; }
         public List<Product> Products { get; set; }
+        public List<Order> Orders { get; set; }
 
     }
 }

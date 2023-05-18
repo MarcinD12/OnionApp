@@ -21,37 +21,23 @@ builder.Services.AddSwaggerGen();
 
 
 var conString = builder.Configuration.GetConnectionString("SqliteConnection");
-builder.Services.AddDbContext<EFInvoiceRepository>(options =>
+builder.Services.AddDbContext<DatabaseContext>(options =>
 {
     options.UseSqlite(conString, b => b.MigrationsAssembly("OnionApi"));
 });
 
-builder.Services.AddDbContext<EFOrderRepository>(options=> {
-    options.UseSqlite(conString,b=>b.MigrationsAssembly("OnionApi"));
-    
-    }
-   );
-builder.Services.AddDbContext<EFPartRepository>(options => {
-    options.UseSqlite(conString, b => b.MigrationsAssembly("OnionApi"));
 
-}
-   );
-builder.Services.AddDbContext<EFProductRepository>(options => {
-    options.UseSqlite(conString, b => b.MigrationsAssembly("OnionApi"));
 
-}
-   );
-
-builder.Services.AddTransient<IEFInvoiceRepository, EFInvoiceRepository>();
+builder.Services.AddTransient<IEFInvoiceRepository, DatabaseContext>();
 builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 
-builder.Services.AddTransient<IEFProductRepository, EFProductRepository>();
+builder.Services.AddTransient<IEFProductRepository, DatabaseContext>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
-builder.Services.AddTransient<IEFPartRepository,EFPartRepository>();
+builder.Services.AddTransient<IEFPartRepository, DatabaseContext>();
 builder.Services.AddScoped<IPartService,PartService>();
 
-builder.Services.AddTransient<IEFOrderRepository, EFOrderRepository>();
+builder.Services.AddTransient<IEFOrderRepository, DatabaseContext>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
 

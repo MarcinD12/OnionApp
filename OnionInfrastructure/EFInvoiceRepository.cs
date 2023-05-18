@@ -21,8 +21,13 @@ namespace OnionInfrastructure
         protected override void OnModelCreating (ModelBuilder builder)
         {
             base.OnModelCreating (builder);
-            
+
         }
-       
+
+        public void AddInvoice(Invoice invoice)
+        {
+            this.Invoices.Add(invoice);
+            this.SaveChanges();
+        }
     }
 }

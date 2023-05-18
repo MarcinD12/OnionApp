@@ -26,5 +26,11 @@ namespace OnionInfrastructure
         {
             this.Products.Add(product);
         }
+
+        //invoice
+
+
+
+       
     }
 }

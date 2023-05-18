@@ -23,11 +23,12 @@ namespace OnionInfrastructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-           builder.Entity<Order>().HasOne(x=>x.Invoice).WithOne(x=>x.Order).HasForeignKey<Invoice>(x=>x.OrderId);
+           
         }
 
         public void addOrderToDatabase(Order order)
         {
+            Console.WriteLine(order.Cost);
             this.Orders.Add(order);
             this.SaveChanges();
         }

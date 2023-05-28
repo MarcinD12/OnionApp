@@ -9,6 +9,10 @@ namespace OnionCore.Interfaces
 {
     public interface ISupplierService
     {
-        public void AddSupplier(Supplier invoice);
+        public void AddSupplier(Supplier supplier);
+        public void RemoveSupplier(int supplierId);
+        public void UpdateSupplier(Supplier supplier);
+        public IEnumerable<Supplier> GetSuppliers();
+
     }
 }

@@ -25,8 +25,8 @@ namespace Application
 
         public Warehouse GetWarehouseById(int id)
         {
-            Warehouse order = _EFWarehouseRepository.GetWarehouseById(id);
-            return order;
+            Warehouse warehouse = _EFWarehouseRepository.GetWarehouseById(id);
+            return warehouse;
         }
     }
 }

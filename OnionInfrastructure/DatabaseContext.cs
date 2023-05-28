@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace OnionInfrastructure
 {
-    public class DatabaseContext : DbContext, IEFSupplierRepository, IEFWarehouseRepository,IEFPartRepository,IEFStockRepository
+    public class DatabaseContext : DbContext, IEFSupplierRepository, IEFWarehouseRepository, IEFPartRepository, IEFStockRepository
     {
-        public virtual DbSet<Supplier> Invoices { get; set; }
-        public virtual DbSet<Warehouse> Orders { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
-        public virtual DbSet<Stock> Products { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
 
-        public DatabaseContext(DbContextOptions<DatabaseContext>options) : base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
 
         }
@@ -25,28 +25,8 @@ namespace OnionInfrastructure
             base.OnModelCreating(builder);
 
         }
-
-        //Product
-
-        public void AddProduct(Stock product)
-        {
-            this.Products.Add(product);
-        }
-
-        //Order
-
-
-
-
-
-        public Warehouse GetWarehouseDetails(int id)
-        {
-            Warehouse order = this.Orders.Find(id);
-            return order;
-        }
-
-
         //Part
+
         public List<Part> GetAllParts()
         {
             var allparts = this.Parts.ToList();
@@ -69,35 +49,82 @@ namespace OnionInfrastructure
 
         public void DeletePart(int partId)
         {
-            this.Remove(partId);
-        }
-
-        //invoice
-
-        public void AddInvoice(Supplier invoice)
-        {
-            this.Invoices.Add(invoice);
+            Part parttodelete = this.Parts.Find(partId);
+            this.Parts.Remove(parttodelete);
             this.SaveChanges();
         }
 
-        public void AddSupplier(Supplier invoice)
+        //stock
+        public void AddStock(Stock stock)
         {
-            throw new NotImplementedException();
+            this.Stocks.Add(stock);
+            this.SaveChanges();
         }
 
+        public void RemoveStock(int stockid)
+        {
+            Stock stockToDelete = this.Stocks.Find(stockid);
+            this.Stocks.Remove(stockToDelete);
+            this.SaveChanges();
+        }
+
+        public void UpdateStock(Stock stock)
+        {
+            Stock stocktoupdate = this.Stocks.Find(stock.StockId);
+            stocktoupdate = stock;
+            this.Stocks.Update(stocktoupdate);
+            this.SaveChanges();
+        }
+
+        public void DeleteStock(int stockId)
+        {
+            Stock stockToDelete = this.Stocks.Find(stockId);
+            this.Stocks.Remove(stockToDelete);
+            this.SaveChanges();
+        }
+
+        public Stock GetStockDetails(int stockid)
+        {
+            return this.Stocks.Find(stockid);
+        }
+        //Suppliers
+        public void AddSupplier(Supplier supplier)
+        {
+            this.Suppliers.Add(supplier);
+            this.SaveChanges();
+        }
+
+        public void RemoveSupplier(int supplierId)
+        {
+            Supplier supplierToDelete = this.Suppliers.Find(supplierId);
+            this.Suppliers.Remove(supplierToDelete);
+            this.SaveChanges();
+        }
+
+        public void UpdateSupplier(Supplier supplier)
+        {
+            Supplier supplierToUpdate = this.Suppliers.Find(supplier.SupplierId);
+            supplierToUpdate = supplier;
+            this.Suppliers.Update(supplierToUpdate);
+            this.SaveChanges();
+        }
+
+        public IEnumerable<Supplier> GetSuppliers()
+        {
+            return this.Suppliers.ToList();
+        }
+        //warhouse
         public void AddWarehouse(Warehouse warehouse)
         {
-            throw new NotImplementedException();
-        }
-
-        public void AddStock(Stock product)
-        {
-            throw new NotImplementedException();
+            this.Warehouses.Add(warehouse);
+            this.SaveChanges();
         }
 
         public Warehouse GetWarehouseById(int id)
         {
-            throw new NotImplementedException();
+            return this.Warehouses.Find(id);
         }
+
+        
     }
 }

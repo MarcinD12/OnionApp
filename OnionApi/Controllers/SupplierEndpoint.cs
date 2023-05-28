@@ -8,12 +8,12 @@ namespace OnionApi.Controllers
     {
         private readonly ISupplierService supplierService;
 
-        public SupplierEndpoint(ISupplierService invoiceService)
+        public SupplierEndpoint(ISupplierService supplierService)
         {
-            this.supplierService = invoiceService;
+            this.supplierService = supplierService;
         }
 
-        [HttpGet("api/invoices/add")]
+        [HttpGet("api/suppliers/add")]
         public void AddSupplier(Supplier invoice)
         {
             supplierService.AddSupplier(invoice);

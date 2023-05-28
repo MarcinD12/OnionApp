@@ -10,15 +10,30 @@ namespace Application
 {
     public class StockService : IStockService
     {
-        private readonly IEFStockRepository eFProductRepository;
+        private readonly IEFStockRepository eFStockRepository;
         public StockService(IEFStockRepository productRepository)
         {
-            eFProductRepository = productRepository;
+            eFStockRepository = productRepository;
         }
 
         public void AddStock(Stock product)
         {
-            throw new NotImplementedException();
+            eFStockRepository.AddStock(product);
+        }
+
+        public void DeleteStock(int stockid)
+        {
+            eFStockRepository.DeleteStock(stockid);
+        }
+
+
+        public void UpdateStock(Stock product)
+        {
+            eFStockRepository.UpdateStock(product);
+        }
+        public Stock GetStockDetails(int stockid)
+        {
+            return eFStockRepository.GetStockDetails(stockid);
         }
     }
 }

@@ -8,16 +8,16 @@ using OnionCore.Models;
 using OnionCore;
 namespace Application
 {
-    public class InvoiceService : IInvoiceService
+    public class SupplierService : ISupplierService
     {
-        private readonly IEFInvoiceRepository _EFInvoiceRepository;
-        public InvoiceService(IEFInvoiceRepository EFInvoiceRepository)
+        private readonly IEFSupplierRepository _EFInvoiceRepository;
+        public SupplierService(IEFSupplierRepository EFInvoiceRepository)
         {
             _EFInvoiceRepository = EFInvoiceRepository;
         }
-        public void AddInvoice(Invoice invoice)
+        public void AddSupplier(Supplier invoice)
         {
-            _EFInvoiceRepository.AddInvoice(invoice);
+            _EFInvoiceRepository.AddSupplier(invoice);
         }
     }
 }

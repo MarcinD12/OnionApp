@@ -2,7 +2,7 @@
 
 namespace OnionApi.Controllers
 {
-    public class ProductEndpoint : Controller
+    public class StockEndpoint : Controller
     {
     }
 }

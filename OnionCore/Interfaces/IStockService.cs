@@ -1,14 +1,14 @@
-﻿using OnionCore.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OnionCore.Models;
 
 namespace OnionCore.Interfaces
 {
-    public interface IInvoiceService
+    public interface IStockService
     {
-        public void AddInvoice(Invoice invoice);
+        public void AddStock(Stock product);
     }
 }

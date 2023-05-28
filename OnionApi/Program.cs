@@ -28,17 +28,17 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 
 
 
-builder.Services.AddTransient<IEFInvoiceRepository, DatabaseContext>();
-builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+builder.Services.AddTransient<IEFSupplierRepository, DatabaseContext>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
 
-builder.Services.AddTransient<IEFProductRepository, DatabaseContext>();
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddTransient<IEFStockRepository, DatabaseContext>();
+builder.Services.AddScoped<IStockService, StockService>();
 
 builder.Services.AddTransient<IEFPartRepository, DatabaseContext>();
 builder.Services.AddScoped<IPartService,PartService>();
 
-builder.Services.AddTransient<IEFOrderRepository, DatabaseContext>();
-builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddTransient<IEFWarehouseRepository, DatabaseContext>();
+builder.Services.AddScoped<IWarehouseService, WarehouseService>();
 
 
 var app = builder.Build();

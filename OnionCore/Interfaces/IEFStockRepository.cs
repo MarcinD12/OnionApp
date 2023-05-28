@@ -7,8 +7,8 @@ using OnionCore.Models;
 
 namespace OnionCore.Interfaces
 {
-    public interface IEFProductRepository
+    public interface IEFStockRepository
     {
-        public void AddProduct(Product product);
+        public void AddStock(Stock product);
     }
 }

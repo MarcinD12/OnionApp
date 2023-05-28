@@ -11,9 +11,11 @@ namespace OnionCore.Models
         public int PartId { get; set; }
         public string PartName { get; set; }
         public int Price { get; set; }
-        public int PartStock { get; set; }
-        public List<Product> Products { get; set; }
-        public List<Order> Orders { get; set; }
+
+        public Supplier? Supplier { get; set; }
+        public int? SupplierId { get; set; }
+
+        public ICollection<Stock> Stocks { get; set; }
 
     }
 }

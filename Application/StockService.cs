@@ -8,19 +8,17 @@ using System.Threading.Tasks;
 
 namespace Application
 {
-    public class ProductService : IProductService
+    public class StockService : IStockService
     {
-        private readonly IEFProductRepository eFProductRepository;
-        public ProductService(IEFProductRepository productRepository)
+        private readonly IEFStockRepository eFProductRepository;
+        public StockService(IEFStockRepository productRepository)
         {
             eFProductRepository = productRepository;
         }
-        public void AddProduct(Product product)
-        {
-            
-        }
-        
 
-       
+        public void AddStock(Stock product)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace OnionCore.Interfaces
 {
-    public interface IEFOrderRepository
+    public interface IEFWarehouseRepository
     {
-        public void addOrderToDatabase(Order order);
-        public List<Order> GetAllOrders();
-        public Order GetOrderById(int id);
+        public void AddWarehouse(Warehouse warehouse);
+        public Warehouse GetWarehouseById(int id);
     }
 }

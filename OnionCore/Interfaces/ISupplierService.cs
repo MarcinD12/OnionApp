@@ -1,14 +1,14 @@
-﻿using System;
+﻿using OnionCore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OnionCore.Models;
 
 namespace OnionCore.Interfaces
 {
-    public interface IProductService
+    public interface ISupplierService
     {
-        public void AddProduct(Product product);
+        public void AddSupplier(Supplier invoice);
     }
 }

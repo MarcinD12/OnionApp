@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace OnionCore.Interfaces
 {
-    public interface IEFInvoiceRepository
+    public interface IEFSupplierRepository
     {
-        public void AddInvoice(Invoice invoice);
+        public void AddSupplier(Supplier invoice);
     }
 }

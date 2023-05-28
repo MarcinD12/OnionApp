@@ -7,10 +7,9 @@ using OnionCore.Models;
 
 namespace OnionCore.Interfaces
 {
-    public interface IOrderService
+    public interface IWarehouseService
     {
-        public void AddOrder(Order order);
-        public List<Order> GetAllOrders();
-        public Order GetOrderById(int id);
+        public void AddWarehouse(Warehouse warehouse);
+
     }
 }

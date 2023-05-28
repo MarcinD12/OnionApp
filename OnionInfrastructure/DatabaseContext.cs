@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace OnionInfrastructure
 {
-    public class DatabaseContext : DbContext, IEFInvoiceRepository, IEFOrderRepository,IEFPartRepository,IEFProductRepository
+    public class DatabaseContext : DbContext, IEFSupplierRepository, IEFWarehouseRepository,IEFPartRepository,IEFStockRepository
     {
-        public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Supplier> Invoices { get; set; }
+        public virtual DbSet<Warehouse> Orders { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Stock> Products { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext>options) : base(options)
         {
@@ -28,30 +28,20 @@ namespace OnionInfrastructure
 
         //Product
 
-        public void AddProduct(Product product)
+        public void AddProduct(Stock product)
         {
             this.Products.Add(product);
         }
 
         //Order
 
-        public void addOrderToDatabase(Order order)
-        {
-            Console.WriteLine(order.Cost);
-            this.Orders.Add(order);
-            this.SaveChanges();
-        }
 
-        public List<Order> GetAllOrders()
-        {
-            var allorders = this.Orders.ToList();
-            foreach (var order in allorders) { Console.WriteLine(order.OrderType); }
-            return allorders;
-        }
 
-        public Order GetOrderById(int id)
+
+
+        public Warehouse GetWarehouseDetails(int id)
         {
-            Order order = this.Orders.Find(id);
+            Warehouse order = this.Orders.Find(id);
             return order;
         }
 
@@ -84,11 +74,30 @@ namespace OnionInfrastructure
 
         //invoice
 
-        public void AddInvoice(Invoice invoice)
+        public void AddInvoice(Supplier invoice)
         {
             this.Invoices.Add(invoice);
             this.SaveChanges();
         }
 
+        public void AddSupplier(Supplier invoice)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddWarehouse(Warehouse warehouse)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddStock(Stock product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Warehouse GetWarehouseById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

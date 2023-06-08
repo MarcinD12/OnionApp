@@ -1,20 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OnionCore.Interfaces;
 using OnionCore.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnionInfrastructure
 {
-    public class DatabaseContext : DbContext, IEFSupplierRepository, IEFWarehouseRepository, IEFPartRepository, IEFStockRepository
+    public class DatabaseContext : IdentityDbContext<UserEntity,UserRole,int>, IEFSupplierRepository, IEFWarehouseRepository, IEFPartRepository, IEFStockRepository
     {
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
-        public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; } 
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

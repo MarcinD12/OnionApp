@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnionCore.Interfaces;
 using OnionCore.Models;
 namespace OnionApi.Controllers
@@ -11,7 +12,7 @@ namespace OnionApi.Controllers
         {
             _partService = partservice;
         }
-
+        [Authorize(Policy = "Bearer")]
         [HttpGet("api/parts/all")]
         public string GetAllParts()
         {

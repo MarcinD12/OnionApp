@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnionCore.Interfaces;
 using OnionCore.Models;
 
 namespace OnionApi.Controllers
 {
+    [Authorize(Policy = "Bearer")]
     public class StockEndpoint : Controller
     {
         private readonly IStockService _stockService;   
@@ -17,6 +19,7 @@ namespace OnionApi.Controllers
         {
             return _stockService.GetStockDetails(stockId);
         }
+        [Authorize(Roles = "user")]
         [HttpPost("api/stocks/add")]
         public void AddStock(Stock stock)
         {

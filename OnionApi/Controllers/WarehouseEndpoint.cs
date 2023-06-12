@@ -5,9 +5,11 @@ using OnionCore.Models;
 using OnionInfrastructure;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnionApi.Controllers
 {
+    [Authorize(Policy = "Bearer")]
     public class WarehouseEndpoint : Controller
     {
 

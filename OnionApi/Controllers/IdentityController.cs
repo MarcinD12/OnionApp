@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnionInfrastructure;
-using Microsoft.AspNetCore.Identity;
+﻿using JWT.Algorithms;
+using JWT.Builder;
 using Microsoft.AspNetCore.Authorization;
-using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.JsonWebTokens;
 using OnionApi.Identity;
-using JWT.Builder;
-using JWT.Algorithms;
+using OnionInfrastructure;
+using System.Text;
 
 namespace OnionApi.Controllers
 {
@@ -16,24 +17,34 @@ namespace OnionApi.Controllers
         private readonly UserManager<UserEntity> _manager;
         private readonly JwtSettings _jwtSettings;
         private readonly ILogger _logger;
-        public IdentityController(UserManager<UserEntity> manager,
-       ILogger<IdentityController> logger, IConfiguration configuration, JwtSettings
+        public RoleManager<UserRole> rolemanager;
+        public IdentityController(UserManager<UserEntity> manager,RoleManager<UserRole> roleMgr,ILogger<IdentityController> logger, IConfiguration configuration, JwtSettings
        jwtSettings)
         {
             _manager = manager;
             _logger = logger;
             _jwtSettings = jwtSettings;
+            rolemanager = roleMgr;
         }
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Authenticate([FromBody] LoginUserDto user)
         {
 
+            //new role
+            //UserRole newrole = new UserRole();
+            //newrole.Name = "user";
+            //rolemanager.CreateAsync(newrole);
+            //newuser
             //var newuser = new UserEntity();
-            //newuser.UserName = "user1";
-            //var res=_manager.CreateAsync(newuser, "User1pass!");
+            //newuser.UserName = "user2";           
+            //var res = _manager.CreateAsync(newuser, "User1pass!");
             //Console.WriteLine(res.Result);
+            //addusertorole
+            //UserEntity usertorole = await _manager.FindByNameAsync("user2");
+            //_manager.AddToRoleAsync(usertorole,"user");
 
+            //return Unauthorized();
 
             if (!ModelState.IsValid)
             {

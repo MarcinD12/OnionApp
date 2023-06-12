@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using OnionCore.Interfaces;
 using OnionApi.Identity;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +18,7 @@ builder.Services.AddControllers();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 
 
 
@@ -41,7 +41,14 @@ builder.Services.AddScoped<IPartService,PartService>();
 
 builder.Services.AddTransient<IEFWarehouseRepository, DatabaseContext>();
 builder.Services.AddScoped<IWarehouseService, WarehouseService>();
-// identity
+//identity
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("requireadmin", policy =>
+        policy.RequireRole("admin"));
+    options.AddPolicy("requireuser", policy => policy.RequireRole("user"));
+});
 builder.Services.AddSingleton<JwtSettings>();
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(new JwtSettings(builder.Configuration));
@@ -94,11 +101,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.UseAuthorization();
 
-app.MapControllers();
 
 app.Run();

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnionCore.Interfaces;
 using OnionCore.Models;
 
 namespace OnionApi.Controllers
 {
+    [Authorize(Policy = "Bearer")]
     public class SupplierEndpoint : Controller
     {
         private readonly ISupplierService supplierService;
@@ -12,7 +14,7 @@ namespace OnionApi.Controllers
         {
             this.supplierService = supplierService;
         }
-
+        [Authorize(Roles = "admin")]
         [HttpGet("api/suppliers/add")]
         public void AddSupplier(Supplier invoice)
         {

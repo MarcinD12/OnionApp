@@ -1,12 +1,9 @@
-using Microsoft.EntityFrameworkCore;
-using OnionInfrastructure;
-using Microsoft.Extensions.DependencyInjection;
 using Application;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using OnionCore.Interfaces;
-using OnionApi.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Identity;
+using OnionApi.Identity;
+using OnionCore.Interfaces;
+using OnionInfrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +34,7 @@ builder.Services.AddTransient<IEFStockRepository, DatabaseContext>();
 builder.Services.AddScoped<IStockService, StockService>();
 
 builder.Services.AddTransient<IEFPartRepository, DatabaseContext>();
-builder.Services.AddScoped<IPartService,PartService>();
+builder.Services.AddScoped<IPartService, PartService>();
 
 builder.Services.AddTransient<IEFWarehouseRepository, DatabaseContext>();
 builder.Services.AddScoped<IWarehouseService, WarehouseService>();

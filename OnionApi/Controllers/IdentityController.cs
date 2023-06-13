@@ -2,11 +2,12 @@
 using JWT.Builder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IIS;
 using Microsoft.IdentityModel.JsonWebTokens;
 using OnionApi.Identity;
 using OnionInfrastructure;
+using System.Security.Claims;
 using System.Text;
 
 namespace OnionApi.Controllers
@@ -18,7 +19,7 @@ namespace OnionApi.Controllers
         private readonly JwtSettings _jwtSettings;
         private readonly ILogger _logger;
         public RoleManager<UserRole> rolemanager;
-        public IdentityController(UserManager<UserEntity> manager,RoleManager<UserRole> roleMgr,ILogger<IdentityController> logger, IConfiguration configuration, JwtSettings
+        public IdentityController(UserManager<UserEntity> manager, RoleManager<UserRole> roleMgr, ILogger<IdentityController> logger, IConfiguration configuration, JwtSettings
        jwtSettings)
         {
             _manager = manager;
@@ -26,25 +27,28 @@ namespace OnionApi.Controllers
             _jwtSettings = jwtSettings;
             rolemanager = roleMgr;
         }
+
+        [HttpPost("register")]
+        public async void Register([FromBody] LoginUserDto user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return;
+            }
+            UserEntity userEntity = new UserEntity();
+            userEntity.UserName = user.LoginName;
+            
+            _manager.CreateAsync(userEntity, user.Password);
+            _manager.AddToRoleAsync(userEntity, "user");
+            return;
+        }
+
+
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Authenticate([FromBody] LoginUserDto user)
         {
 
-            //new role
-            //UserRole newrole = new UserRole();
-            //newrole.Name = "user";
-            //rolemanager.CreateAsync(newrole);
-            //newuser
-            //var newuser = new UserEntity();
-            //newuser.UserName = "user2";           
-            //var res = _manager.CreateAsync(newuser, "User1pass!");
-            //Console.WriteLine(res.Result);
-            //addusertorole
-            //UserEntity usertorole = await _manager.FindByNameAsync("user2");
-            //_manager.AddToRoleAsync(usertorole,"user");
-
-            //return Unauthorized();
 
             if (!ModelState.IsValid)
             {
@@ -57,8 +61,21 @@ namespace OnionApi.Controllers
             }
             return Unauthorized();
         }
+        private async Task<IEnumerable<string>> GetUserRoles(UserEntity user)
+        {
+            var roles =await  _manager.GetRolesAsync(user);          
+            role = roles[0];
+            return roles;
+            
+        }
+        private string role { get; set; }
         private string CreateToken(UserEntity user)
         {
+            
+            var roles = GetUserRoles(user);
+            
+            Console.WriteLine(role);
+            
             return new JwtBuilder()
             .WithAlgorithm(new HMACSHA256Algorithm())
             .WithSecret(Encoding.UTF8.GetBytes(_jwtSettings.Secret))
@@ -68,6 +85,7 @@ namespace OnionApi.Controllers
             .AddClaim(JwtRegisteredClaimNames.Exp,
            DateTimeOffset.UtcNow.AddMinutes(5).ToUnixTimeSeconds())
             .AddClaim(JwtRegisteredClaimNames.Jti, Guid.NewGuid())
+            .AddClaim(ClaimTypes.Role, role)
             .Audience(_jwtSettings.Audience)
             .Issuer(_jwtSettings.Issuer)
             .Encode();

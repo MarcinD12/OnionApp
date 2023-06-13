@@ -20,7 +20,7 @@ namespace OnionApi.Controllers
             var parts = _partService.GetAllParts();
             return parts;
         }
-        
+
         [HttpPost("api/parts/add")]
         public void AddPart(Part part)
         {

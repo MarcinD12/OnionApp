@@ -8,7 +8,7 @@ namespace OnionApi.Controllers
     [Authorize(Policy = "Bearer")]
     public class StockEndpoint : Controller
     {
-        private readonly IStockService _stockService;   
+        private readonly IStockService _stockService;
         public StockEndpoint(IStockService stockservice)
         {
             _stockService = stockservice;

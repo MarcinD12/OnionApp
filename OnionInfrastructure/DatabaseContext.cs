@@ -5,12 +5,12 @@ using OnionCore.Models;
 
 namespace OnionInfrastructure
 {
-    public class DatabaseContext : IdentityDbContext<UserEntity,UserRole,int>, IEFSupplierRepository, IEFWarehouseRepository, IEFPartRepository, IEFStockRepository
+    public class DatabaseContext : IdentityDbContext<UserEntity, UserRole, int>, IEFSupplierRepository, IEFWarehouseRepository, IEFPartRepository, IEFStockRepository
     {
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
-        public virtual DbSet<Stock> Stocks { get; set; } 
+        public virtual DbSet<Stock> Stocks { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
@@ -121,6 +121,6 @@ namespace OnionInfrastructure
             return this.Warehouses.Find(id);
         }
 
-        
+
     }
 }

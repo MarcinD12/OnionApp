@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System;
-using OnionInfrastructure;
 using Newtonsoft.Json;
+using OnionInfrastructure;
+using System.Text;
 
 namespace OnionApi.Identity
 {

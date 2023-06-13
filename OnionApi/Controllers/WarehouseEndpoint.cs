@@ -1,11 +1,7 @@
-﻿using Application;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnionCore.Interfaces;
 using OnionCore.Models;
-using OnionInfrastructure;
-using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 
 namespace OnionApi.Controllers
 {
@@ -33,7 +29,7 @@ namespace OnionApi.Controllers
 
         }
 
-        
+
 
 
 

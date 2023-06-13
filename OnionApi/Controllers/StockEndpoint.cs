@@ -13,7 +13,7 @@ namespace OnionApi.Controllers
         {
             _stockService = stockservice;
         }
-
+        [Authorize(Roles = "user")]
         [HttpGet("api/stocks/get")]
         public Stock GetStockDetails(int stockId)
         {
@@ -25,6 +25,7 @@ namespace OnionApi.Controllers
         {
             _stockService.AddStock(stock);
         }
+        [Authorize(Roles = "user")]
         [HttpPost("api/stocks/update")]
         public void UpdateStock(Stock stock)
         {

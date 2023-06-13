@@ -13,7 +13,7 @@ namespace OnionApi.Controllers
         {
             _partService = partservice;
         }
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "user")]
         [HttpGet("api/parts/all")]
         public string GetAllParts()
         {

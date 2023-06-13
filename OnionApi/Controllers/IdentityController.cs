@@ -9,7 +9,7 @@ using OnionApi.Identity;
 using OnionInfrastructure;
 using System.Security.Claims;
 using System.Text;
-
+using System.Linq;
 namespace OnionApi.Controllers
 {
     [ApiController, Route("/api/authentication")]
@@ -48,8 +48,7 @@ namespace OnionApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Authenticate([FromBody] LoginUserDto user)
         {
-
-
+          
             if (!ModelState.IsValid)
             {
                 return Unauthorized();
@@ -61,22 +60,22 @@ namespace OnionApi.Controllers
             }
             return Unauthorized();
         }
-        private async Task<IEnumerable<string>> GetUserRoles(UserEntity user)
+        private async void GetUserRoles(UserEntity user)
         {
-            var roles =await  _manager.GetRolesAsync(user);          
-            role = roles[0];
-            return roles;
+            role = (List<string>)await _manager.GetRolesAsync(user).ConfigureAwait(false);          
+            
+            
+            return;
             
         }
-        private string role { get; set; }
+        private List<string> role { get; set; }
         private string CreateToken(UserEntity user)
         {
             
-            var roles = GetUserRoles(user);
+            GetUserRoles(user);
             
             Console.WriteLine(role);
-            
-            return new JwtBuilder()
+            JwtBuilder jwtb = new JwtBuilder()
             .WithAlgorithm(new HMACSHA256Algorithm())
             .WithSecret(Encoding.UTF8.GetBytes(_jwtSettings.Secret))
             .AddClaim(JwtRegisteredClaimNames.Name, user.UserName)
@@ -84,11 +83,33 @@ namespace OnionApi.Controllers
             .AddClaim(JwtRegisteredClaimNames.Email, user.Email)
             .AddClaim(JwtRegisteredClaimNames.Exp,
            DateTimeOffset.UtcNow.AddMinutes(5).ToUnixTimeSeconds())
-            .AddClaim(JwtRegisteredClaimNames.Jti, Guid.NewGuid())
-            .AddClaim(ClaimTypes.Role, role)
+            .AddClaim(JwtRegisteredClaimNames.Jti, Guid.NewGuid())            
             .Audience(_jwtSettings.Audience)
-            .Issuer(_jwtSettings.Issuer)
-            .Encode();
+            .Issuer(_jwtSettings.Issuer);
+            //.Encode();
+
+            jwtb.AddClaim(ClaimTypes.Role, role);
+            
+
+            //foreach (var item in role)
+            //{
+            //    Console.WriteLine(item);
+            //    jwtb.AddClaim(ClaimTypes.Role, role.ToString());
+            //}
+            return jwtb.Encode();
+            // return new JwtBuilder()
+            // .WithAlgorithm(new HMACSHA256Algorithm())
+            // .WithSecret(Encoding.UTF8.GetBytes(_jwtSettings.Secret))
+            // .AddClaim(JwtRegisteredClaimNames.Name, user.UserName)
+            // .AddClaim(JwtRegisteredClaimNames.Gender, "male")
+            // .AddClaim(JwtRegisteredClaimNames.Email, user.Email)
+            // .AddClaim(JwtRegisteredClaimNames.Exp,
+            //DateTimeOffset.UtcNow.AddMinutes(5).ToUnixTimeSeconds())
+            // .AddClaim(JwtRegisteredClaimNames.Jti, Guid.NewGuid())         
+            // .AddClaim(ClaimTypes.Role, role)
+            // .Audience(_jwtSettings.Audience)
+            // .Issuer(_jwtSettings.Issuer)
+            // .Encode();
         }
     }
 }

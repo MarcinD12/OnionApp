@@ -16,9 +16,9 @@ namespace OnionApi.Controllers
         }
         [Authorize(Roles = "admin")]
         [HttpGet("api/suppliers/add")]
-        public void AddSupplier(Supplier invoice)
+        public void AddSupplier(Supplier supplier)
         {
-            supplierService.AddSupplier(invoice);
+            supplierService.AddSupplier(supplier);
         }
 
 

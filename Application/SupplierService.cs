@@ -1,5 +1,6 @@
 ﻿using OnionCore.Interfaces;
 using OnionCore.Models;
+using System.Text.Json;
 namespace Application
 {
     public class SupplierService : ISupplierService
@@ -14,9 +15,10 @@ namespace Application
             _EFSupplierRepository.AddSupplier(invoice);
         }
 
-        public IEnumerable<Supplier> GetSuppliers()
+        public string GetSuppliers()
         {
-            return _EFSupplierRepository.GetSuppliers();
+            var suppliers= _EFSupplierRepository.GetSuppliers();
+            return JsonSerializer.Serialize(suppliers);
         }
 
         public void RemoveSupplier(int supplierId)
@@ -28,5 +30,7 @@ namespace Application
         {
             _EFSupplierRepository.UpdateSupplier(supplier);
         }
+
+        
     }
 }

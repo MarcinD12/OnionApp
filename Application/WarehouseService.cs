@@ -23,5 +23,10 @@ namespace Application
             Warehouse warehouse = _EFWarehouseRepository.GetWarehouseById(id);
             return warehouse;
         }
+
+        public void RemoveWarehouse(Warehouse warehouse)
+        {
+            _EFWarehouseRepository.RemoveWarehouse(warehouse);
+        }
     }
 }

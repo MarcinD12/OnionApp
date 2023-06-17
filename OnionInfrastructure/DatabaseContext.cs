@@ -104,8 +104,8 @@ namespace OnionInfrastructure
             this.Suppliers.Update(supplierToUpdate);
             this.SaveChanges();
         }
-
-        public IEnumerable<Supplier> GetSuppliers()
+        
+        public List<Supplier> GetSuppliers()
         {
             return this.Suppliers.ToList();
         }
@@ -121,6 +121,17 @@ namespace OnionInfrastructure
             return this.Warehouses.Find(id);
         }
 
+        public void RemoveWarehouse(Warehouse warehouse)
+        {
+            this.Warehouses.Remove(warehouse);
+        }
 
+        public List<Stock> GetAllStock()
+        {
+            var allstock=this.Stocks.ToList();
+            return allstock;
+        }
+
+        
     }
 }

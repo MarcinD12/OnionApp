@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Application;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnionCore.Interfaces;
 using OnionCore.Models;
@@ -19,6 +20,20 @@ namespace OnionApi.Controllers
         public void AddSupplier(Supplier supplier)
         {
             supplierService.AddSupplier(supplier);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpDelete("api/suppliers/delete")]
+        public void DeletePart(int partId)
+        {
+            supplierService.RemoveSupplier(partId);
+        }
+        [Authorize(Roles = "user")]
+        [HttpGet("api/suppliers/all")]
+        public string GetSuppliers()
+        {
+            var suppliers = supplierService.GetSuppliers();
+            return suppliers;
         }
 
 

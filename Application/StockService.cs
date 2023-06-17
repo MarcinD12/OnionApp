@@ -1,6 +1,6 @@
 ﻿using OnionCore.Interfaces;
 using OnionCore.Models;
-
+using System.Text.Json;
 namespace Application
 {
     public class StockService : IStockService
@@ -29,6 +29,12 @@ namespace Application
         public Stock GetStockDetails(int stockid)
         {
             return eFStockRepository.GetStockDetails(stockid);
+        }
+
+        public string GetAllStock()
+        {
+            var allstock= eFStockRepository.GetAllStock();
+            return JsonSerializer.Serialize(allstock);
         }
     }
 }

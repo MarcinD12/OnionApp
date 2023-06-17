@@ -8,7 +8,7 @@ namespace OnionCore.Interfaces
         public void RemoveSupplier(int supplierId);
 
         public void UpdateSupplier(Supplier supplier);
-        public IEnumerable<Supplier> GetSuppliers();
+        public List<Supplier> GetSuppliers();
 
     }
 }

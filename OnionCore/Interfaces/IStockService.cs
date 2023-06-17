@@ -8,7 +8,7 @@ namespace OnionCore.Interfaces
         public void UpdateStock(Stock stockId);
         public void DeleteStock(int stockId);
         public Stock GetStockDetails(int stockid);
-
+        public string GetAllStock();
 
     }
 }

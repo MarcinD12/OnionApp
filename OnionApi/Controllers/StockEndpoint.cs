@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Application;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnionCore.Interfaces;
 using OnionCore.Models;
@@ -31,6 +32,13 @@ namespace OnionApi.Controllers
         {
             _stockService.UpdateStock(stock);
         }
+        [Authorize(Roles = "user")]
+        [HttpPost("api/stocks/getall")]
+        public string GetAllStock()
+        {
+            var stocks = _stockService.GetAllStock();
+            return stocks;
 
+        }
     }
 }

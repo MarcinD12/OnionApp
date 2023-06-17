@@ -22,13 +22,19 @@ namespace OnionApi.Controllers
             _warehouseService.AddWarehouse(warehouse);
         }
         [Authorize(Roles = "user")]
-        [HttpGet("api/warehouses/detailds")]
+        [HttpGet("api/warehouses/details")]
         public Warehouse GetDetails(int id)
         {
             return _warehouseService.GetWarehouseById(id);
 
         }
-
+        [Authorize(Roles = "admin")]
+        [HttpPost("api/warehouses/remove")]
+        public void RemoveWarehouse(int id)
+        {
+            var warehouse = _warehouseService.GetWarehouseById(id);
+            _warehouseService.RemoveWarehouse(warehouse);
+        }
 
 
 

@@ -124,6 +124,8 @@ namespace OnionInfrastructure
         public void RemoveWarehouse(Warehouse warehouse)
         {
             this.Warehouses.Remove(warehouse);
+            this.SaveChanges();
+
         }
 
         public List<Stock> GetAllStock()

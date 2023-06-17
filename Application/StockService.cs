@@ -1,6 +1,7 @@
 ﻿using OnionCore.Interfaces;
 using OnionCore.Models;
 using System.Text.Json;
+
 namespace Application
 {
     public class StockService : IStockService

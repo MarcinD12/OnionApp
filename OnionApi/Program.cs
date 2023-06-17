@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using OnionApi.Identity;
 using OnionCore.Interfaces;
 using OnionInfrastructure;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +26,11 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlite(conString, b => b.MigrationsAssembly("OnionApi"));
 });
 
-
-
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 builder.Services.AddTransient<IEFSupplierRepository, DatabaseContext>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 

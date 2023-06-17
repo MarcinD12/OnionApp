@@ -87,7 +87,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Todos API",
+        Title = "OnionApp",
     });
 });
 
